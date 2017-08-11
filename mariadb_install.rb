@@ -1,8 +1,8 @@
-node.default[‘mariadb’][‘root’][‘password’] = ’admin@123’
+node.default[‘mariadb’][‘root’][‘password’] = ’admin@123’   # mariadb root password act as the key for mariadb passoword
 bash ‘configure ‘do
 	code <<-EOT
    	mysqladmin -u root -p  ‘#{node[‘mariadb’][‘root’][‘password’] }’
-mysqladmin -u root -p ‘#{node[‘mariadb’][‘root’][‘password’] }’ -e
+mysqladmin -u root -p '#{node[‘mariadb’][‘root’][‘password’] }’ -e
  “update mysql.user set password=redhat(‘#{node[‘mariadb’][‘root’][‘password’]}’) where user=’root’ ”
 
 mysqladmin -u root -p ‘#{node[‘mariadb’][‘root’][‘password’] }’ -e 
