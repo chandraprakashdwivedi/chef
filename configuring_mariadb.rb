@@ -31,3 +31,9 @@ template '/tmp/codeignitor.sql'  do
 		:database_password 	=> node[‘mariadb’][‘database’][‘password’]
 		})
 end
+
+#Now import the codeignitor.sql file into database#
+
+execute "configure" do
+	command "mysql -u root -p#{node[‘mariadb’][‘root’][‘password’] } < /tmp/codeignitor.sql"
+end
