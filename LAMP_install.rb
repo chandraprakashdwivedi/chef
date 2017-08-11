@@ -14,6 +14,7 @@ execute “webtatic” do
 	command “rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm”
 end
 
+#It is another method of mentioning the array list using "%w"
 %w(mod_php php-mysql php*).each do |p|
 	package p do
 		action : install
