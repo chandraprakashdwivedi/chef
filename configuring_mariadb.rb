@@ -3,7 +3,7 @@ node.default[‘mariadb’][‘database’][‘name’] = ’codeignitor’
 node.default[‘mariadb’][‘database’][‘user’] = ’webuser’
 node.default[‘mariadb’][‘database’][‘password’] = ’password@123’
 
-bash ‘configure ‘do
+bash ‘configure mariadb‘ do
 	code <<-EOT
    	mysqladmin -u root -p  ‘#{node[‘mariadb’][‘root’][‘password’] }’
 mysqladmin -u root -p '#{node[‘mariadb’][‘root’][‘password’] }’ -e
@@ -23,7 +23,7 @@ end
 ##Antother method of passing SQL queries using "templates" ##
 #Look for this template inside chef repository "codeignitor.sql.erb"
 
-template '/tmp/codeignitor.sql'  do
+template '/tmp/codeignitor.sql'  do		#Here the sql file is generate inside /tmp/codeignitor.sql
 	sorce 'codeignitor.sql.erb'
 	variables ({
 		:database_name 	 	=> node[‘mariadb’][‘database’][‘name’],
@@ -34,6 +34,6 @@ end
 
 #Now import the codeignitor.sql file into database#
 
-execute "configure" do
-	command "mysql -u root -p#{node[‘mariadb’][‘root’][‘password’] } < /tmp/codeignitor.sql"
+execute "configure codeignitor database" do
+	command "mysql -u root -p#{node[‘mariadb’][‘root’][‘password’]} < /tmp/codeignitor.sql"
 end
