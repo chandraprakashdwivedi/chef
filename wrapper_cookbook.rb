@@ -13,3 +13,7 @@ nginx_server_vhost 'localhost' do
     'port'      => 80
     }]
 end
+
+cookbook_file '/var/www/localhost/index.html'  do
+  source  'index.html'
+end
