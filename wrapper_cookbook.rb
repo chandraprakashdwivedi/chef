@@ -14,6 +14,11 @@ nginx_server_vhost 'localhost' do
     }]
 end
 
+execute 'create web root' do
+    command 'mkdir -p /var/www/localhost'
+    not_if "[-d /var/www/localhost ]"
+end
+
 cookbook_file '/var/www/localhost/index.html'  do
-  source  'index.html'
+  source  'index.html'  #that file is accessed by file directory inside your cookbook
 end
